@@ -4,11 +4,12 @@
 
 import re   #regex library
 from timeit import default_timer as timer
+import operator
 
 if __name__ == '__main__':    
     startTime = timer()
     
-    TwitterFilePath = 'tinyTwitter.json'
+    TwitterFilePath = 'smallTwitter.json'
     gridFilePath = 'MelbGrid.json'
     
     # Store tweets_coordinates found in file
@@ -29,7 +30,7 @@ if __name__ == '__main__':
                 tweets_coordinates.append((float(temp_res[0][0]), float(temp_res[0][1])))
     
     print("Number of lines read:\n", len(tweets_coordinates))
-    print("First and last elements:\n", tweets_coordinates[0], tweets_coordinates[-1])
+    #print("First and last elements:\n", tweets_coordinates[0], tweets_coordinates[-1])
 
 #     Read grid_boxes
     grid_patt = re.compile('\\"([A-Z]\\d)\\", \\"xmin\\": (\\d{1,3}\\.\\d+), \\"xmax\\": (\\d{1,3}\\.\\d+), \\"ymin\\": (-\\d{1,3}\\.\\d+), \\"ymax\\": (-\\d{1,3}\\.\\d+)')
@@ -42,20 +43,25 @@ if __name__ == '__main__':
                 box_counts[temp_box[0][0]] = 0
     
     print("Number of grid_boxes boxes read:\n", len(grid_boxes))
-    print("First and last elements:\n", grid_boxes[0], grid_boxes[-1])
+    #print("First and last elements:\n", grid_boxes[0], grid_boxes[-1])
     
     tweets_categorised = 0
     
 #     Categorize tweets
-    for tweet_loc in tweets_coordinates:
+    for tweet_loc in tweets_coordinates:        
         for grid_box in grid_boxes:
             if tweet_loc[0] > grid_box[1] and tweet_loc[0] <= grid_box[2] and tweet_loc[1] >= grid_box[3] and tweet_loc[1] < grid_box[4]:
                 box_counts[grid_box[0]]+=1
                 tweets_categorised+=1
-                  
-    for grid_box in grid_boxes:
-        print(grid_box[0], ":", box_counts[grid_box[0]])
+                     
+    #for grid_box in grid_boxes:
+    #    print(grid_box[0], ":", box_counts[grid_box[0]])
     print("Total tweets categorised:", tweets_categorised)
+    
+#     Sort zones by counts
+    sorted_zones = sorted(box_counts.items(), key=operator.itemgetter(1), reverse=True)
+    for zone in sorted_zones:
+        print(zone[0], ":", zone[1])    
     
 #     Print processing time
     endTime = timer()
