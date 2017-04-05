@@ -8,6 +8,7 @@ Mapping Twitter Data using MPI on SPARTAN
 
 import numpy
 import copy
+import sys
 from mpi4py import MPI
  
 # Get MPI Info
@@ -23,7 +24,7 @@ comm.Barrier()
 if proc_rank == 0:
     start_time = MPI.Wtime()
 
-TwitterFilePath = 'smallTwitter.json'
+TwitterFilePath = sys.argv[1]
 gridFilePath = 'melbGrid.json'
 
 # Regex for matching tweets_coordinates in JSON file for each tweet
@@ -38,15 +39,15 @@ grid_boxes = [] # all processes should fill it themselves exactly the same
 tw_coord_narray = None  # each process will get a subset via scatter
 
 # number of coordinates read - each process gets this value broadcasted
-num_coordinates = numpy.zeros(1, dtype=numpy.int16)
-even_split_idx = numpy.zeros(1, dtype=numpy.int16)
+num_coordinates = numpy.zeros(1, dtype=numpy.int32)
+even_split_idx = numpy.zeros(1, dtype=numpy.int32)
 
 # dict to store each zone and its tweet count
 box_counts = {} # all processes initialise it to zero; but each calculates its own
 
 # tweets that have been boxed
-tweets_categorised = numpy.zeros(1, dtype=numpy.int16) # each need to calculate its own
-total_tweets_categorised = numpy.zeros(1, dtype=numpy.int16)
+tweets_categorised = numpy.zeros(1, dtype=numpy.int32) # each need to calculate its own
+total_tweets_categorised = numpy.zeros(1, dtype=numpy.int32)
 
 def readJSONTweetFile(filePath, tweets_read):    
     tweets_coordinates = []
@@ -68,7 +69,7 @@ def readJSONGridboxFile(filepath):
             temp_box = grid_patt.findall(line)
             if (temp_box):
                 grid_boxes.append((temp_box[0][0], float(temp_box[0][1]), float(temp_box[0][2]), float(temp_box[0][3]), float(temp_box[0][4])))
-                box_counts[temp_box[0][0]] = numpy.zeros(1, dtype=numpy.int16)
+                box_counts[temp_box[0][0]] = numpy.zeros(1, dtype=numpy.int32)
 
 def gridifyTweets(tw_coord):
     global box_counts, tweets_categorised

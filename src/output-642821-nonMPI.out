@@ -1,0 +1,33 @@
+# of tweets read: 3218503
+# of Coordinates that passed regex: 426200
+Total tweets categorised: 393623
+
+C2: 139288 tweets.
+B2: 78673 tweets.
+C3: 52749 tweets.
+B3: 26209 tweets.
+C4: 19450 tweets.
+B1: 16384 tweets.
+D4: 14555 tweets.
+D3: 13300 tweets.
+C1: 8373 tweets.
+B4: 5445 tweets.
+A3: 5024 tweets.
+A2: 4142 tweets.
+C5: 4025 tweets.
+D5: 3151 tweets.
+A1: 2546 tweets.
+A4: 309 tweets.
+
+C-Rows: 223885 tweets.
+B-Rows: 126711 tweets.
+D-Rows: 31006 tweets.
+A-Rows: 12021 tweets.
+
+Column 2: 222103 tweets.
+Column 3: 97282 tweets.
+Column 4: 39759 tweets.
+Column 1: 27303 tweets.
+Column 5: 7176 tweets.
+
+Duration: 31.8244 sec(s).
