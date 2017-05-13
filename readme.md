@@ -4,7 +4,9 @@
 
 ### Cluster and Cloud Computing - Assignment 1 (Individual)
 ---
-Read assignment details [here](data/a1-spec.pdf)
+A parallelized application leveraging the University of Melbourne HPC facility SPARTAN. It  searches a large geocoded Twitter dataset to identify tweet hotspots around Melbourne.
+
+Read full assignment details [here](data/a1-spec.pdf)
 
 ---
 Run non-MPI version of the program via ```./src/<script>.py <twitter data file> <grid file>```.
