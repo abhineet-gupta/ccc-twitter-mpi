@@ -8,8 +8,7 @@
 
 # Maximum number of nodes, tasks/CPU cores and CPUs per task used by the job:
 #SBATCH --nodes=1
-#SBATCH --ntasks=8
-#SBATCH --cpus-per-task=1
+#SBATCH --ntasks=1
 
 # The name of the job:
 #SBATCH --job-name=CCC_Twitter_AB
@@ -20,12 +19,12 @@
 #SBATCH --mail-type=END
 
 # output from program goes into these files
-#SBATCH -o 'output-18-%j.out'
-#SBATCH -e 'error_output-18-%j.err'
+#SBATCH -o 'output-11-%j.out'
+#SBATCH -e 'error_output-11-%j.err'
 
 # The modules to load:
 module load Python/3.5.2-goolf-2015a
 
 # The job command(s):
-mpirun -np 8 ./CCC_A1_MPI.py bigTwitter.json
+mpirun -np 1 ./CCC_A1_MPI.py bigTwitter.json
 

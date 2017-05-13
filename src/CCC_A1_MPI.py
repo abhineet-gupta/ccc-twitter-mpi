@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 '''
 @author: Abhineet Gupta
@@ -6,9 +6,9 @@ CCC Assignment 1; Sem 1, 2017
 Mapping Twitter Data using MPI on SPARTAN
 '''
 
-import numpy
 import copy
 import sys
+import numpy
 from mpi4py import MPI
  
 # Get MPI Info
@@ -25,7 +25,7 @@ if proc_rank == 0:
     start_time = MPI.Wtime()
 
 TwitterFilePath = sys.argv[1]
-gridFilePath = 'melbGrid.json'
+gridFilePath = sys.argv[2]
 
 # Regex for matching tweets_coordinates in JSON file for each tweet
 coord_patt = re.compile('\\"coordinates\\":\\[(14[45]\\.\\d+),(-3[78]\\.\\d+)]')
